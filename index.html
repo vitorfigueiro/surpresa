@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uma Surpresa para Você!</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #a8edd2 0%, #fed6e3 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+
+    /* Container do Patinho com Presente */
+    .delivery-container {
+      position: absolute;
+      left: -250px;
+      display: flex;
+      align-items: flex-end;
+      cursor: pointer;
+      animation: walkIn 4s forwards cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* Patinho desenhado em CSS */
+    .duck-character {
+      position: relative;
+      width: 100px;
+      height: 110px;
+      animation: waddle 0.4s infinite alternate ease-in-out;
+    }
+
+    .duck-head {
+      position: absolute;
+      top: 0;
+      left: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #FFD700;
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    .duck-eye {
+      position: absolute;
+      top: 18px;
+      right: 15px;
+      width: 8px;
+      height: 8px;
+      background-color: #000;
+      border-radius: 50%;
+    }
+
+    .duck-beak {
+      position: absolute;
+      top: 26px;
+      right: -10px;
+      width: 25px;
+      height: 16px;
+      background-color: #FF8C00;
+      border-radius: 10px;
+    }
+
+    .duck-body {
+      position: absolute;
+      bottom: 15px;
+      left: 10px;
+      width: 75px;
+      height: 55px;
+      background-color: #FFD700;
+      border-radius: 30px 30px 20px 40px;
+      z-index: 1;
+    }
+
+    .duck-wing {
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      width: 35px;
+      height: 25px;
+      background-color: #FFC700;
+      border-radius: 20px 5px 20px 20px;
+      animation: flap 0.4s infinite alternate ease-in-out;
+    }
+
+    .duck-foot {
+      position: absolute;
+      bottom: 0;
+      width: 20px;
+      height: 10px;
+      background-color: #FF8C00;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .duck-foot.left {
+      left: 25px;
+      animation: step 0.4s infinite alternate;
+    }
+
+    .duck-foot.right {
+      left: 50px;
+      animation: step 0.4s infinite alternate-reverse;
+    }
+
+    /* Caixinha de Presente */
+    .gift-box {
+      font-size: 60px;
+      margin-left: -10px;
+      margin-bottom: 15px;
+      z-index: 3;
+      transition: transform 0.3s ease;
+      animation: bounce 0.6s infinite alternate;
+    }
+
+    .delivery-container:hover .gift-box {
+      transform: scale(1.2) rotate(10deg);
+    }
+
+    /* Cartão de Mensagem */
+    .message-card {
+      display: none;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 35px;
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      max-width: 85%;
+      width: 380px;
+      animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .message-card h2 {
+      color: #ff5e7e;
+      margin-top: 0;
+    }
+
+    .message-card p {
+      color: #4a4a4a;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    /* Animações Keyframes */
+    @keyframes walkIn {
+      0% { left: -250px; }
+      100% { left: calc(50% - 85px); }
+    }
+
+    @keyframes waddle {
+      0% { transform: translateY(0) rotate(-3deg); }
+      100% { transform: translateY(-6px) rotate(3deg); }
+    }
+
+    @keyframes flap {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(15deg); }
+    }
+
+    @keyframes step {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-5px); }
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
+    }
+
+    @keyframes popUp {
+      0% { opacity: 0; transform: scale(0.3); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="delivery-container" id="delivery" onclick="openGift()">
+    <div class="duck-character">
+      <div class="duck-head">
+        <div class="duck-eye"></div>
+        <div class="duck-beak"></div>
+      </div>
+      <div class="duck-body">
+        <div class="duck-wing"></div>
+      </div>
+      <div class="duck-foot left"></div>
+      <div class="duck-foot right"></div>
+    </div>
+    <div class="gift-box">🎁</div>
+  </div>
+
+  <div class="message-card" id="secretMessage">
+    <h2>🎉 SURPRESA! 🎉</h2>
+    <p>O patinho atravessou a tela inteira só para te trazer essa mensagem especial!</p>
+    <p><strong>Você é Maravilhosa! ❤️</strong></p>
+  </div>
+
+  <script>
+    function openGift() {
+      document.getElementById('delivery').style.display = 'none';
+      document.getElementById('secretMessage').style.display = 'block';
+
+      confetti({
+        particleCount: 150,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
+    }
+  </script>
+</body>
+</html>
