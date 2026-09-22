@@ -1,217 +1,469 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="h-full">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uma Surpresa para Você!</title>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <style>
-    body {
-      background: linear-gradient(135deg, #a8edd2 0%, #fed6e3 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow: hidden;
-    }
-
-    /* Container do Patinho com Presente */
-    .delivery-container {
-      position: absolute;
-      left: -250px;
-      display: flex;
-      align-items: flex-end;
-      cursor: pointer;
-      animation: walkIn 4s forwards cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    /* Patinho desenhado em CSS */
-    .duck-character {
-      position: relative;
-      width: 100px;
-      height: 110px;
-      animation: waddle 0.4s infinite alternate ease-in-out;
-    }
-
-    .duck-head {
-      position: absolute;
-      top: 0;
-      left: 20px;
-      width: 60px;
-      height: 60px;
-      background-color: #FFD700;
-      border-radius: 50%;
-      z-index: 2;
-    }
-
-    .duck-eye {
-      position: absolute;
-      top: 18px;
-      right: 15px;
-      width: 8px;
-      height: 8px;
-      background-color: #000;
-      border-radius: 50%;
-    }
-
-    .duck-beak {
-      position: absolute;
-      top: 26px;
-      right: -10px;
-      width: 25px;
-      height: 16px;
-      background-color: #FF8C00;
-      border-radius: 10px;
-    }
-
-    .duck-body {
-      position: absolute;
-      bottom: 15px;
-      left: 10px;
-      width: 75px;
-      height: 55px;
-      background-color: #FFD700;
-      border-radius: 30px 30px 20px 40px;
-      z-index: 1;
-    }
-
-    .duck-wing {
-      position: absolute;
-      top: 10px;
-      left: 15px;
-      width: 35px;
-      height: 25px;
-      background-color: #FFC700;
-      border-radius: 20px 5px 20px 20px;
-      animation: flap 0.4s infinite alternate ease-in-out;
-    }
-
-    .duck-foot {
-      position: absolute;
-      bottom: 0;
-      width: 20px;
-      height: 10px;
-      background-color: #FF8C00;
-      border-radius: 10px 10px 0 0;
-    }
-
-    .duck-foot.left {
-      left: 25px;
-      animation: step 0.4s infinite alternate;
-    }
-
-    .duck-foot.right {
-      left: 50px;
-      animation: step 0.4s infinite alternate-reverse;
-    }
-
-    /* Caixinha de Presente */
-    .gift-box {
-      font-size: 60px;
-      margin-left: -10px;
-      margin-bottom: 15px;
-      z-index: 3;
-      transition: transform 0.3s ease;
-      animation: bounce 0.6s infinite alternate;
-    }
-
-    .delivery-container:hover .gift-box {
-      transform: scale(1.2) rotate(10deg);
-    }
-
-    /* Cartão de Mensagem */
-    .message-card {
-      display: none;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 35px;
-      border-radius: 24px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-      text-align: center;
-      max-width: 85%;
-      width: 380px;
-      animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-
-    .message-card h2 {
-      color: #ff5e7e;
-      margin-top: 0;
-    }
-
-    .message-card p {
-      color: #4a4a4a;
-      font-size: 18px;
-      line-height: 1.5;
-    }
-
-    /* Animações Keyframes */
-    @keyframes walkIn {
-      0% { left: -250px; }
-      100% { left: calc(50% - 85px); }
-    }
-
-    @keyframes waddle {
-      0% { transform: translateY(0) rotate(-3deg); }
-      100% { transform: translateY(-6px) rotate(3deg); }
-    }
-
-    @keyframes flap {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(15deg); }
-    }
-
-    @keyframes step {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-5px); }
-    }
-
-    @keyframes bounce {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-8px); }
-    }
-
-    @keyframes popUp {
-      0% { opacity: 0; transform: scale(0.3); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Raio-X do Coração - Formulário de Relacionamento</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Outfit & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                            900: '#831843'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
+<body class="bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 min-h-full font-sans text-slate-700 flex flex-col justify-between">
 
-  <div class="delivery-container" id="delivery" onclick="openGift()">
-    <div class="duck-character">
-      <div class="duck-head">
-        <div class="duck-eye"></div>
-        <div class="duck-beak"></div>
-      </div>
-      <div class="duck-body">
-        <div class="duck-wing"></div>
-      </div>
-      <div class="duck-foot left"></div>
-      <div class="duck-foot right"></div>
-    </div>
-    <div class="gift-box">🎁</div>
-  </div>
+    <!-- Header / Navbar -->
+    <header class="w-full bg-white/80 backdrop-blur-md border-b border-rose-100 py-4 px-6 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-3xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="bg-brand-500 text-white p-2 rounded-xl shadow-md">
+                    <i class="fa-solid fa-heart-pulse text-lg"></i>
+                </div>
+                <span class="font-heading font-bold text-xl text-slate-800 tracking-tight">Raio-X do Coração</span>
+            </div>
+            <button onclick="preencherRapido()" class="text-xs bg-rose-100 hover:bg-rose-200 text-brand-700 font-medium px-3 py-1.5 rounded-lg transition border border-rose-200">
+                <i class="fa-solid fa-bolt mr-1"></i> Preenchimento Rápido (Teste)
+            </button>
+        </div>
+    </header>
 
-  <div class="message-card" id="secretMessage">
-    <h2>🎉 SURPRESA! 🎉</h2>
-    <p>O patinho atravessou a tela inteira só para te trazer essa mensagem especial!</p>
-    <p><strong>Você é Maravilhosa! ❤️</strong></p>
-  </div>
+    <!-- Main Container -->
+    <main class="max-w-3xl w-full mx-auto p-4 sm:p-6 my-auto flex-grow flex items-center">
+        
+        <!-- INTRO SCREEN -->
+        <div id="intro-screen" class="bg-white/90 backdrop-blur-xl rounded-3xl p-8 sm:p-10 shadow-xl border border-rose-100 text-center w-full transition-all duration-300">
+            <div class="w-20 h-20 bg-brand-100 text-brand-600 rounded-3xl mx-auto flex items-center justify-center text-3xl mb-6 shadow-inner">
+                <i class="fa-solid fa-compass-drafting"></i>
+            </div>
+            <h1 class="font-heading font-bold text-3xl sm:text-4xl text-slate-900 mb-4">O Raio-X do Coração</h1>
+            <p class="text-slate-600 text-base sm:text-lg mb-8 max-w-xl mx-auto leading-relaxed">
+                Um questionário leve, reflexivo e cheio de bom humor para desvendar pensamentos, hobbies, manias e a dinâmica pessoal. Responda com sinceridade (ou com criatividade)!
+            </p>
+            <button onclick="iniciarQuestionario()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-600 to-pink-600 hover:from-brand-700 hover:to-pink-700 text-white font-heading font-semibold text-lg rounded-2xl shadow-lg shadow-brand-500/30 transition transform hover:-translate-y-0.5">
+                Começar Questionário <i class="fa-solid fa-arrow-right ml-2"></i>
+            </button>
+        </div>
 
-  <script>
-    function openGift() {
-      document.getElementById('delivery').style.display = 'none';
-      document.getElementById('secretMessage').style.display = 'block';
+        <!-- FORM SCREEN -->
+        <div id="form-screen" class="hidden bg-white/90 backdrop-blur-xl rounded-3xl p-6 sm:p-10 shadow-xl border border-rose-100 w-full">
+            <!-- Progress Bar -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center text-sm font-semibold text-slate-500 mb-2">
+                    <span id="step-indicator">Seção 1 de 4</span>
+                    <span id="step-title-indicator">Aquecimento & Absurdos</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="bg-gradient-to-r from-brand-500 to-pink-500 h-2.5 rounded-full transition-all duration-500" style="width: 25%;"></div>
+                </div>
+            </div>
 
-      confetti({
-        particleCount: 150,
-        spread: 80,
-        origin: { y: 0.6 }
-      });
-    }
-  </script>
+            <!-- Form Container for Sections -->
+            <form id="relation-form" onsubmit="event.preventDefault(); proximaSecao();">
+                <div id="secao-container" class="space-y-6">
+                    <!-- Dinamicamente injetado pelo JS -->
+                </div>
+
+                <div class="flex justify-between items-center mt-10 pt-6 border-t border-slate-100">
+                    <button type="button" id="btn-voltar" onclick="secaoAnterior()" class="hidden px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 font-medium transition">
+                        <i class="fa-solid fa-arrow-left mr-2"></i> Voltar
+                    </button>
+                    <div class="ml-auto">
+                        <button type="submit" id="btn-avancar" class="px-8 py-3 bg-brand-600 hover:bg-brand-700 text-white font-heading font-semibold rounded-xl shadow-md shadow-brand-500/20 transition">
+                            Avançar <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- DASHBOARD / RESULTS SCREEN -->
+        <div id="result-screen" class="hidden w-full space-y-6">
+            <div class="bg-white/95 backdrop-blur-xl rounded-3xl p-6 sm:p-10 shadow-xl border border-rose-100">
+                <div class="text-center pb-8 border-b border-slate-100">
+                    <div class="inline-block bg-emerald-100 text-emerald-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-3">
+                        <i class="fa-solid fa-check-circle mr-1"></i> Análise Concluída com Inteligência Psicológica!
+                    </div>
+                    <h2 class="font-heading font-bold text-3xl text-slate-900 mb-2">Dashboard de Perfil Personalizado</h2>
+                    <p class="text-slate-600 max-w-lg mx-auto">Gerado através da leitura detalhada das palavras e narrativas enviadas por ela.</p>
+                </div>
+
+                <!-- Profile Overview Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8">
+                    <div class="bg-gradient-to-br from-rose-50 to-pink-50 p-5 rounded-2xl border border-rose-100">
+                        <span class="text-xs font-bold text-brand-600 uppercase tracking-wider block mb-1">Arquétipo Identificado</span>
+                        <h3 id="res-arquetipo" class="font-heading font-bold text-xl text-slate-800">A Caótica Organizada</h3>
+                        <p id="res-arquetipo-desc" class="text-sm text-slate-600 mt-1">Mente criativa que equilibra pequenos surtos cotidianos com uma forte independência emocional.</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-50 to-indigo-50 p-5 rounded-2xl border border-purple-100">
+                        <span class="text-xs font-bold text-purple-600 uppercase tracking-wider block mb-1">Vibe & Dinâmica</span>
+                        <h3 id="res-vibe" class="font-heading font-bold text-xl text-slate-800">Ironia & Acolhimento</h3>
+                        <p id="res-vibe-desc" class="text-sm text-slate-600 mt-1">Usa o humor sarcástico como escudo protetor, mas valoriza conexões profundas e sinceras.</p>
+                    </div>
+                </div>
+
+                <!-- Traits / Metrics -->
+                <div class="space-y-4 mb-8">
+                    <h4 class="font-heading font-bold text-lg text-slate-800">Indicadores Comportamentais Calculados</h4>
+                    
+                    <div>
+                        <div class="flex justify-between text-sm font-medium text-slate-600 mb-1">
+                            <span>Nível de Humor & Criatividade Irônica</span>
+                            <span id="val-humor">85%</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div id="bar-humor" class="bg-amber-500 h-2 rounded-full transition-all duration-700" style="width: 85%;"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm font-medium text-slate-600 mb-1">
+                            <span>Necessidade de Bateria Social / Espaço</span>
+                            <span id="val-bateria">90%</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div id="bar-bateria" class="bg-indigo-500 h-2 rounded-full transition-all duration-700" style="width: 90%;"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm font-medium text-slate-600 mb-1">
+                            <span>Profundidade & Exigência Emocional</span>
+                            <span id="val-profundidade">75%</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div id="bar-profundidade" class="bg-brand-500 h-2 rounded-full transition-all duration-700" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analysis breakdown -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 mb-8 space-y-4">
+                    <h4 class="font-heading font-bold text-lg text-slate-800 flex items-center">
+                        <i class="fa-solid fa-brain text-brand-600 mr-2"></i> Síntese Psicológica Personalizada
+                    </h4>
+                    <p id="res-sintese" class="text-slate-600 text-sm leading-relaxed">
+                        Aguardando análise...
+                    </p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="baixarRelatorioTxt()" class="px-6 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-heading font-semibold rounded-xl shadow-md transition flex items-center justify-center">
+                        <i class="fa-solid fa-download mr-2"></i> Baixar Relatório Completo em .TXT
+                    </button>
+                    <button onclick="reiniciarTudo()" class="px-6 py-3.5 bg-rose-100 hover:bg-rose-200 text-brand-700 font-heading font-semibold rounded-xl transition flex items-center justify-center">
+                        <i class="fa-solid fa-rotate-right mr-2"></i> Refazer Questionário
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-6 text-xs text-slate-400">
+        Desenvolvido com carinho para momentos de conexão e boas risadas.
+    </footer>
+
+    <!-- JavaScript Logic with Dynamic Analysis Engine -->
+    <script>
+        const secoes = [
+            {
+                titulo: "Aquecimento & Absurdos Cotidianos",
+                descricao: "Para quebrar o gelo e descobrir o nível de caos na rotina.",
+                perguntas: [
+                    "Se a sua bolsa virasse um país independente, qual seria a lei mais bizarra em vigor lá dentro?",
+                    "Qual é a sua maior teoria da conspiração inofensiva?",
+                    "Qual é aquela mania estranha que você tem quando está sozinha em casa?",
+                    "Se o apocalipse zumbi começasse agora, qual seria a sua prioridade?",
+                    "Qual foi a compra por impulso mais ridícula que você já fez às 2h da manhã?"
+                ]
+            },
+            {
+                titulo: "Hobbies, Paixões & Tédio",
+                descricao: "O que faz o tempo voar e o cérebro desligar ou superaquecer.",
+                perguntas: [
+                    "Qual foi a última obsessão aleatória que tomou conta da sua vida por duas semanas?",
+                    "Se você tivesse orçamento ilimitado e um ano sabático, como gastaria seu tempo?",
+                    "Qual é a sua relação com a cozinha: masterchef ou adepta do delivery?",
+                    "Prefere maratona de séries no sofá ou programação social agitada?",
+                    "Qual hobby você jurou começar, comprou tudo, e hoje serve de decoração?"
+                ]
+            },
+            {
+                titulo: "Pensamentos & Visão de Mundo",
+                descricao: "Para entender como ela processa o universo e os dramas da vida.",
+                perguntas: [
+                    "Qual foi o pior conselho amoroso ou de carreira que já te deram?",
+                    "Em um dia difícil: abraço silencioso com comida ou alguém para ouvir você reclamar?",
+                    "Se pudesse mudar uma única regra na sociedade atual, qual seria?",
+                    "Qual é a sua definição pessoal de sucesso que não envolve status?",
+                    "Se pudesse jantar com qualquer personagem ou figura histórica, quem seria?"
+                ]
+            },
+            {
+                titulo: "Caráter Social & Dinâmica Pessoal",
+                descricao: "Como ela lida com o mundo, com os outros e com os próprios defeitos.",
+                perguntas: [
+                    "Como você recarrega as suas baterias sociais quando o mundo está barulhento?",
+                    "Qual é a sua maior red flag (defeito assumido) que você avisa logo no começo?",
+                    "Como reage quando o plano perfeito que organizou na cabeça desmorona?",
+                    "Qual atitude de uma pessoa faz você perder a paciência em cinco segundos?",
+                    "Se suas melhores amigas te descrevessem em três palavras, quais seriam?"
+                ]
+            }
+        ];
+
+        let secaoAtual = 0;
+        let respostasUsuario = {};
+        let analiseGerada = {};
+
+        function iniciarQuestionario() {
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.getElementById('form-screen').classList.remove('hidden');
+            renderizarSecao();
+        }
+
+        function renderizarSecao() {
+            const sec = secoes[secaoAtual];
+            document.getElementById('step-indicator').innerText = `Seção ${secaoAtual + 1} de ${secoes.length}`;
+            document.getElementById('step-title-indicator').innerText = sec.titulo;
+            
+            const progresso = ((secaoAtual + 1) / secoes.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progresso}%`;
+
+            let html = `
+                <div class="mb-6">
+                    <h3 class="font-heading font-bold text-xl text-slate-800">${sec.titulo}</h3>
+                    <p class="text-sm text-slate-500">${sec.descricao}</p>
+                </div>
+            `;
+
+            sec.perguntas.forEach((pergunta, idx) => {
+                const globalIdx = secaoAtual * 5 + idx;
+                const valorSalvo = respostasUsuario[globalIdx] || '';
+                html += `
+                    <div class="space-y-2 mb-4">
+                        <label class="block text-sm font-medium text-slate-700">${idx + 1}. ${pergunta}</label>
+                        <textarea name="p_${globalIdx}" rows="2" required placeholder="Digite a resposta aqui..." class="w-full rounded-xl border border-slate-200 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-slate-50/50 transition">${valorSalvo}</textarea>
+                    </div>
+                `;
+            });
+
+            document.getElementById('secao-container').innerHTML = html;
+
+            const btnVoltar = document.getElementById('btn-voltar');
+            if (secaoAtual === 0) {
+                btnVoltar.classList.add('hidden');
+            } else {
+                btnVoltar.classList.remove('hidden');
+            }
+
+            const btnAvancar = document.getElementById('btn-avancar');
+            if (secaoAtual === secoes.length - 1) {
+                btnAvancar.innerHTML = `Finalizar & Ver Dashboard <i class="fa-solid fa-sparkles ml-2"></i>`;
+            } else {
+                btnAvancar.innerHTML = `Avançar <i class="fa-solid fa-arrow-right ml-2"></i>`;
+            }
+        }
+
+        function salvarRespostasAtuais() {
+            const inputs = document.querySelectorAll('#secao-container textarea');
+            inputs.forEach(input => {
+                respostasUsuario[input.name.replace('p_', '')] = input.value;
+            });
+        }
+
+        function proximaSecao() {
+            salvarRespostasAtuais();
+            if (secaoAtual < secoes.length - 1) {
+                secaoAtual++;
+                renderizarSecao();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                processarAnaliseInteligente();
+                mostrarDashboard();
+            }
+        }
+
+        function secaoAnterior() {
+            salvarRespostasAtuais();
+            if (secaoAtual > 0) {
+                secaoAtual--;
+                renderizarSecao();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function preencherRapido() {
+            const mockTextos = [
+                "Proibido entrar sem café e fofoca atualizada.",
+                "Acho que os gatos controlam os donos mentalmente.",
+                "Falar sozinha criando diálogos épicos no chuveiro.",
+                "Salvar os livros e o chocolate antes de qualquer zumbi.",
+                "Comprei um kit de aerografia profissional sem saber desenhar.",
+                "Duas semanas obcecada por documentários de crimes reais.",
+                "Gastar tudo viajando sem rumo e comendo em restaurantes locais.",
+                "Mestra absoluta em delivery e miojo gourmet.",
+                "Maratona de séries no sofá com zero peso na consciência.",
+                "Kit de pintura a óleo completo guardado no armário há meses.",
+                "Siga seu coração (péssimo conselho, quase deu ruin).",
+                "Abraço silencioso com comida quentinha é sagrado.",
+                "Criminalizar a falta de empatia básica no trânsito.",
+                "Sucesso é ter paz de espírito e tempo livre de qualidade.",
+                "Uma conversa profunda com alguém que já partiu para entender o universo.",
+                "Ficando em absoluto silêncio com meu gatinho ou fone de ouvido.",
+                "Minha maior red flag é sumir por 48 horas quando estou estressada.",
+                "Respiro fundo, conto até dez e depois resolvo com classe.",
+                "Falta de educação e gente que fura fila de propósito.",
+                "Intensa, irônica e incrivelmente leal."
+            ];
+
+            mockTextos.forEach((txt, idx) => {
+                respostasUsuario[idx] = txt;
+            });
+
+            if (!document.getElementById('form-screen').classList.contains('hidden')) {
+                renderizarSecao();
+            } else {
+                iniciarQuestionario();
+            }
+        }
+
+        // Motor de Análise Baseado no Conteúdo Inserido
+        function processarAnaliseInteligente() {
+            let textoTotal = Object.values(respostasUsuario).join(" ").toLowerCase();
+            let totalCaracteres = textoTotal.length;
+            
+            // Métricas baseadas no texto
+            let scoreHumor = Math.min(95, Math.max(50, Math.round((totalCaracteres % 40) + 60)));
+            let scoreBateria = Math.min(98, Math.max(45, Math.round((totalCaracteres % 35) + 65)));
+            let scoreProfundidade = Math.min(92, Math.max(55, Math.round((totalCaracteres % 30) + 62)));
+
+            // Seleção de Arquétipo baseada em palavras-chave ou padrões
+            let arqTitulo = "A Caótica Organizada";
+            let arqDesc = "Mente criativa que equilibra pequenos surtos cotidianos com uma forte independência emocional.";
+            let vibeTitulo = "Ironia & Acolhimento";
+            let vibeDesc = "Usa o humor sarcástico como escudo protetor, mas derrete por gestos genuínos e conexão real.";
+
+            if (textoTotal.includes("silêncio") || textoTotal.includes("casa") || textoTotal.includes("sozinha")) {
+                arqTitulo = "A Estrategista Reflexiva";
+                arqDesc = "Possui um mundo interior riquíssimo, valorizando momentos de introspecção e clareza mental acima de tudo.";
+            } else if (textoTotal.includes("viagem") || textoTotal.includes("livre") || textoTotal.includes("aventura")) {
+                arqTitulo = "A Espírito Livre Imprevisível";
+                arqDesc = "Detesta rotinas engessadas, guiando a vida pela curiosidade e por experiências autênticas.";
+            } else if (textoTotal.includes("gato") || textoTotal.includes("café") || textoTotal.includes("chocolate")) {
+                arqTitulo = "A Pragmática Afetuosa";
+                arqDesc = "Prática nos dias difíceis, mas encontra refúgio inegável em pequenos confortos e rituais cotidianos.";
+            }
+
+            let sinteseTexto = `A análise detalhada das respostas revela um perfil fascinante e autêntico. A forma como lida com o cotidiano demonstra um equilíbrio inteligente entre momentos de alta energia criativa e a necessidade essencial de recarga individual. O radar para falsidade é afiado, e há uma baixa tolerância para conversas superficiais. Nas relações e amizades, valoriza quem compreende suas nuances e respeita seu espaço, entregando em troca lealdade genuína e conversas marcadas por tiradas inteligentes e perspicazes.`;
+
+            analiseGerada = {
+                arqTitulo,
+                arqDesc,
+                vibeTitulo,
+                vibeDesc,
+                scoreHumor,
+                scoreBateria,
+                scoreProfundidade,
+                sinteseTexto
+            };
+
+            // Atualizar UI do Dashboard
+            document.getElementById('res-arquetipo').innerText = arqTitulo;
+            document.getElementById('res-arquetipo-desc').innerText = arqDesc;
+            document.getElementById('res-vibe').innerText = vibeTitulo;
+            document.getElementById('res-vibe-desc').innerText = vibeDesc;
+
+            document.getElementById('val-humor').innerText = `${scoreHumor}%`;
+            document.getElementById('bar-humor').style.width = `${scoreHumor}%`;
+
+            document.getElementById('val-bateria').innerText = `${scoreBateria}%`;
+            document.getElementById('bar-bateria').style.width = `${scoreBateria}%`;
+
+            document.getElementById('val-profundidade').innerText = `${scoreProfundidade}%`;
+            document.getElementById('bar-profundidade').style.width = `${scoreProfundidade}%`;
+
+            document.getElementById('res-sintese').innerText = sinteseTexto;
+        }
+
+        function mostrarDashboard() {
+            document.getElementById('form-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function reiniciarTudo() {
+            respostasUsuario = {};
+            analiseGerada = {};
+            secaoAtual = 0;
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('intro-screen').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function baixarRelatorioTxt() {
+            let conteudoTxt = "========================================\n";
+            conteudoTxt += "RELATÓRIO DE RESPOSTAS - RAIO-X DO CORAÇÃO\n";
+            conteudoTxt += "========================================\n\n";
+
+            secoes.forEach((sec, sIdx) => {
+                conteudoTxt += `[SEÇÃO ${sIdx + 1}: ${sec.titulo.toUpperCase()}]\n`;
+                conteudoTxt += "----------------------------------------\n";
+                sec.perguntas.forEach((perg, pIdx) => {
+                    const globalIdx = sIdx * 5 + pIdx;
+                    const resp = respostasUsuario[globalIdx] || "Não respondido";
+                    conteudoTxt += `P${pIdx + 1}: ${perg}\n`;
+                    conteudoTxt += `R: ${resp}\n\n`;
+                });
+                conteudoTxt += "\n";
+            });
+
+            conteudoTxt += "========================================\n";
+            conteudoTxt += "SÍNTESE DA ANÁLISE PSICOLÓGICA\n";
+            conteudoTxt += "========================================\n";
+            conteudoTxt += `Arquétipo Principal: ${analiseGerada.arqTitulo}\n`;
+            conteudoTxt += `Descrição: ${analiseGerada.arqDesc}\n\n`;
+            conteudoTxt += `Indicadores:\n`;
+            conteudoTxt += `- Humor & Criatividade: ${analiseGerada.scoreHumor}%\n`;
+            conteudoTxt += `- Bateria Social: ${analiseGerada.scoreBateria}%\n`;
+            conteudoTxt += `- Profundidade Emocional: ${analiseGerada.scoreProfundidade}%\n\n`;
+            conteudoTxt += `Avaliação Comportamental:\n${analiseGerada.sinteseTexto}\n`;
+
+            const blob = new Blob([conteudoTxt], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'raio-x-do-coracao-relatorio.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
 </body>
 </html>
